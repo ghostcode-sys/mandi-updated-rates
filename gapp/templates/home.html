@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color:rgb(168, 74, 90);
+        }
+        .root{
+            text-align: center;
+        }
+        .text1{
+            color: rgb(37, 184, 140);
+            font-size: 48px;
+        }
+        .text2{
+           color: rgb(37, 184, 140);
+           font-size: 20px;
+        }
+        .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 1.5s;
+            animation-name: fade;
+            animation-duration: 1.5s;
+            }
+        img{
+            width: 200px;
+            height: 200px;
+        }
+        button {
+    color: seashell;
+    margin-top: 30px;
+    background-color: royalblue;
+    font-size: medium;
+    width: 222px;
+    height: 42px;
+    font-size: 29px;
+    border-radius: 14px;
+}
+    button:hover{
+        cursor: pointer;
+    }
+    ul{
+        list-style: none;
+    }
+    </style>
+</head>
+<body ><div class="root">
+    <div class="text1">WELCOME <br> TO<br>KISAN MANDI SYSTEM <br>
+    </div>
+    <div class="image fade">{% load static %} <img src="{% static "main/logo.png" %}" alt="logo of college" alt="logo of college"></div>
+    <div class="image fade"> <img src="https://source.unsplash.com/400x400/?market,farmer" alt="logo of college"></div>
+    <div class="image fade"> <img src="https://source.unsplash.com/400x400/?market,farmer" alt="logo of college"></div>
+    <div class="text2">This project is developed for mini project <br>main purpose of this site is to provide
+        updated data  of near by mandies to farmer by just searching on daily basis
+    </div>
+    <a href="/assume"><button>start mandi site</button></a><br><br>
+    <hr></div>
+    <div class="about">
+        <p>about site
+            <ul>
+                <li>home </li>
+                <li>about</li>
+                <li>login</li>
+                <li>admin login</li>
+                <li>search</li>
+            </ul>
+        </p>
+    </div>
+    <script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("image");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
+</body>
+</html>

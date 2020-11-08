@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>.tasks{
+        display: inline-block;
+    }
+    label{
+
+    }
+        </style>
+    <title>crop detail</title>
+
+</head>
+
+<body class=bg-info>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">mandi rates</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about">About us</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        logins
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="signup">sign in</a>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>SIGN IN </strong>if you don't have any account. Please sign up !!!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <a class="dropdown-item" href="login">login</a>
+
+                    </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="alog">admin login <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="/search" method="post">{%csrf_token%}
+                <input class="form-control mr-sm-2" type="search" name="loc" placeholder="Mandi location" aria-label="Search">
+                <input class="form-control mr-sm-2" type="search" name="state"placeholder="State" aria-label="Search">
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <div style="text-align: center;"><h2>welcome {{ name }} your mandi location is {{ loc }},{{state}} <br> here you can submit crop name and price</h2></div>
+    <div style="display:flex;justify-content: center;">
+        <form action="crop" style="background-color: aliceblue;" method="post">{%csrf_token%}
+            <label for="crop" style="
+            border-radius: 10px;
+            border-width: 69px;
+            color: whitesmoke;
+            border-color: black;
+            border: solid;
+            background-color: crimson;
+            font-size: 24px;
+            padding: 5px;
+            ">crop name </label><br>
+            <input type="text" name="crop" placeholder="ex-wheat"style="margin: 20px 20px 35px;
+    font-family: inherit;
+    line-height: inherit;
+    width: 566px;
+    height: 50px;
+    font-size: x-large;
+    border-radius: 10px;
+"
+    height: 50px;
+    font-size: x-large;
+    border-radius: 10px;
+"><br>
+            <label for="price"style="
+            border-radius: 10px;
+            border-width: 69px;
+            color: whitesmoke;
+            border-color: black;
+            border: solid;
+            background-color: crimson;
+            font-size: 24px;
+            padding: 5px;">price per ton</label><br>
+            <input type="text" placeholder="ex-1000.00" style="margin: 20px 20px 35px;
+    font-family: inherit;
+    line-height: inherit;
+    width: 566px;
+    height: 50px;
+    font-size: x-large;
+    border-radius: 10px;
+" name="price"><br>
+<input type="submit" value="next crop" name="next" style=" background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;">
+<input type="submit" value="submit"  style=" background-color:crimson;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;">
+        </form>
+    </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
+    </div>
+    <footer>
+    <div class="card">
+        <div class="card-header">
+            about site
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p>this site is in developing phase .we are trying hard for this site.</p>
+                <footer class="blockquote-footer">mini project work <cite title="Source Title">Source Title</cite>
+                </footer>
+            </blockquote>
+        </div></footer>
+    </div>
+</body>
+
+</html>
