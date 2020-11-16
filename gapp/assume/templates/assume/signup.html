@@ -42,7 +42,7 @@
     * {box-sizing: border-box}
 
 /* Full-width input fields */
-  input[type=text], input[type=password] {
+  input[type=text], input[type=password], input[type=email]{
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -51,7 +51,7 @@
   background: #f1f1f1;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus{
   background-color: #ddd;
   outline: none;
 }
@@ -128,7 +128,7 @@ button:hover {
           <input type="text" placeholder="Enter name" name="nm" required>
 
           <label for="email"><b>Email</b></label><br>
-          <input type="email" placeholder="Enter Email" name="email" required style="width: 100%;padding: 15px;margin: 5px 0 22px 0;display: inline-block;border: none;background: #f1f1f1;"><br>
+          <input type="email" placeholder="Enter Email" name="email" required ><br>
 
           <label for="psw"><b>Password</b></label>
           <input type="password" placeholder="Enter Password" name="psw" required id="psw"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">

@@ -4,6 +4,14 @@ from gnewsclient import gnewsclient
 from .models import *
 import datetime
 from django.core.mail import send_mail
+import random
+import threading
+
+# object to store and deliver different values
+class store:
+    def __init__(self,*values):
+        self.data = values
+        # above code return tuple
 
 # Create your views here.
 def index(request):
@@ -41,7 +49,7 @@ def alogin(request):
     password=request.POST.get("psw")
     username=request.POST.get("uname")
     value = admin_data.objects.get(username = username)
-    var = value
+    var = store(value.username,value.psw,value.name,value.location,value.state)
     if password == value.psw:
         paramas={"name":value.name,"loc":value.location,"state":value.state}
         return render(request,'assume/crop.html',paramas)
@@ -72,10 +80,10 @@ def crop(request):
     cropg = request.POST.get('crop').lower()
     priceg = request.POST.get('price')
     next = request.POST.get('next')
-    qry = Crop(crop_name = cropg, price = priceg,location = var.location,state = var.state)
+    qry = Crop(crop_name = cropg, price = priceg,location = var.data[3],state = var.data[4])
     qry.save()
     if next == "next crop":
-        params = {'name': var.name, 'loc': var.location, 'state': var.state}
+        params = {'name': var.data[2], 'loc': var.data[3], 'state': var.data[4]}
         return render(request,'assume/crop.html',params)
     else:
         mail_man()
@@ -134,20 +142,62 @@ def mail_man():
     lst=[]
     lemail=[]
     tod = datetime.date.today()
-    detail = Crop.objects.all().filter(state=var.state)
-    detail = detail.filter(location=var.location)
+    detail = Crop.objects.all().filter(state=var.data[4])
+    detail = detail.filter(location=var.data[3])
     detail = detail.filter(date = tod)
 
-    message =  f"Updated price of crop at mandi {var.location}, {var.state} is \n"
+    message =  f"Updated price of crop at mandi {var.data[3]}, {var.data[4]} is \n"
     for i in detail:
         msg = f"{i.crop_name} ----> {i.price} \n"
         lst.append(msg)
     for i in lst:
         message += i
     sub = "mandi today updated rate of crop"
-    e_list = user_data.objects.all().filter(state = var.state)
-    e_list = e_list.filter(location = var.location)
+    e_list = user_data.objects.all().filter(state = var.data[4])
+    e_list = e_list.filter(location = var.data[3])
     for i in e_list:
         lemail.append(str(i.username))
     send_mail(sub,message,'prashantchandel2103@gmail.com',lemail,fail_silently=True)
+
+#render forget password page
+def fgtpsw(request):
+    return render(request, 'assume/fgtpsw.html')
+
+# takes email and send 6 digit code to user
+def fgtchk(request):
+    email = request.POST.get('email')
+    uname = request.POST.get('uname')
+    global user_info
+    user_info = store(email,uname)
+    detail = user_data.objects.filter(name=uname,username=email)
+    if detail.exists():
+        global otp
+        otp = store(random.randrange(100000, 999999))
+        sub = "Password reset"
+        message = f""" This is 6 digit code \n{otp.data[0]}\n This code valid for only 10 minutes """
+        send_mail(sub, message, 'prashantchandel2103@gmail.com',[email], fail_silently=False)
+        timer = threading.Timer(600.0,confcode)
+        timer.start()
+        return render(request,'assume/mailconfirm.html')
+    else:
+        return HttpResponse("<h1>No user exits in our data</h1>")
+
+# changes code to zero after 10 min
+def confcode():
+    otp = store("12")
+
+# confirms email
+def confmail(request):
+    code = request.POST.get('code')
+    if str(otp.data[0]) == code :
+        return render(request,'assume/changepsw.html')
+    else:
+        return HttpResponse("<h1> something fishii happened !!!!")
+
+# changes password and save to models
+def newpsw(request):
+    detail = user_data.objects.get(username=user_info.data[0])
+    detail.psw = request.POST.get('psw')
+    detail.save()
+    return index(request)
 

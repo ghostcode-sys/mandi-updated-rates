@@ -14,4 +14,8 @@ urlpatterns = [
     path('crop', views.crop, name='crop'),
     path('ulogin', views.ulogin, name='ulogin'),
     path('contact', views.contact, name='contact'),
+    path('fgtpsw', views.fgtpsw, name='fgtpsw'),
+    path('fgtchk', views.fgtchk, name='fgtchk'),
+    path('confmail', views.confmail, name='confmail'),
+    path('newpsw', views.newpsw, name='newpsw'),
 ]
