@@ -13,7 +13,7 @@ a.create a project
 b.paste gapps in it 
 c. run command in terminal-- python manage.py runserver
 i hope it will work 
-
+if not works let me know mail at [prashantyou@outlook.com]
 Usage
 it is prototypre to provide information to farmer of nearby mandies
 
